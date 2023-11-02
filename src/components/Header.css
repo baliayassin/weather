@@ -1,0 +1,17 @@
+.header-container{
+  justify-content: space-between;
+}
+
+.title{
+    display: flex;
+    font-size: 14;
+    color: black;
+    flex: 1;
+}
+
+.main-favo{
+    display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   margin-right: 2%;
+}
