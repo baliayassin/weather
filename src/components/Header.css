@@ -3,15 +3,11 @@
 }
 
 .title{
-    display: flex;
-    font-size: 14;
+    font-size: 14px;
     color: black;
-    flex: 1;
+    margin-left: 20px;
 }
 
 .main-favo{
-    display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   margin-right: 2%;
+   margin-right: 20px;
 }
