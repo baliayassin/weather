@@ -3,6 +3,9 @@ import {FaRectangleXmark} from 'react-icons/fa6'
 import {AiOutlineHeart} from 'react-icons/ai'
 import axios from 'axios'
 import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToFavorite,removeFromFavorites } from '../store/actions';
+import { Link } from 'react-router-dom';
 
 // import { LOCATION_KEY , API_KEY} from '../consts'
 const API_KEY= 'G6LW66BAOJIVf02GqGquckYRRkGkSMGn'
@@ -166,6 +169,7 @@ const dataObject = [
 ]
 export default function Weather() {
 const [telAvivFiveDaysForecast,setTelAvivFiveDaysForecast] = useState();
+const dispatch = useDispatch()
 
 const data = [{
     day:'Sun',
@@ -204,12 +208,14 @@ const fetchData = async ()=>{
 useEffect(()=>{
 
 //http://dataservice.accuweather.com/forecasts/v1/daily/5day/${LOCATION_KEY}?apikey=${API_KEY}&metric=true
-  
 // fetchData()
 console.log('5 days', dataObject )
 
 },[])
 
+const handleClickHeart = () => {
+    dispatch(addToFavorite('Tel aviv'))
+}
   return (
     <div style={{display:'flex',flexDirection:'column'}}>
       <div style={{width:'70%',height:450,margin:'0 auto',marginTop:'5%',boxShadow: '5px 5px 10px #888888'}}>
@@ -223,16 +229,20 @@ console.log('5 days', dataObject )
             </div>
             <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-start',width:'27%',height:50,marginTop:30}}>
                 <div style={{display:'flex',justifyContent:'flex-start'}}>
-                    <AiOutlineHeart size={50} style={{cursor:'pointer'}} onClick={()=>{console.log('click heart')}}/>
-                    <button onClick={()=>{console.log('click favorite')}} style={{fontSize:20,border: 'none', color: 'black', padding: 10, borderRadius: 10,marginLeft:20,cursor: 'pointer',boxShadow: '5px 5px 10px #888888',borderColor: 'transparent',backgroundColor:'transparent'}}>Add to Favorite</button>
+                    <AiOutlineHeart size={50} style={{cursor:'pointer'}}/>
+                    <Link to={'/favorite'}>
+                    <button onClick={handleClickHeart}
+                     style={{fontSize:20,border: 'none', color: 'black', padding: 10, borderRadius: 10,marginLeft:20,cursor: 'pointer',boxShadow: '5px 5px 10px #888888',borderColor: 'transparent',backgroundColor:'transparent'}}>
+                        Add to Favorite</button>
+                    </Link>
                 </div>
             </div>
         </div>
             <h2 style={{marginTop:'10%'}}>Scattered clouds</h2>
             <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',marginTop:50}}>
                 {
-                    dataObject.map((item) => {return (
-                        <div style={{display:'flex',width:100,height:100,boxShadow: '5px 5px 10px #888888',marginRight:10,borderRadius:10}}>
+                    dataObject.map((item,index) => {return (
+                        <div key={index} style={{display:'flex',width:100,height:100,boxShadow: '5px 5px 10px #888888',marginRight:10,borderRadius:10}}>
                             <div style={{display:'flex',flexDirection:'column',justifyItems:'center',alignItems:'center',margin:'auto'}}>
                                 <div> {moment(item.Date).format('ddd')}</div>
                                 <div>{item.Temperature.Maximum.Value}{`°${item.Temperature.Maximum.Unit}`}</div>
