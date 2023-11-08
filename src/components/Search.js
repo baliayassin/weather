@@ -7,7 +7,7 @@ export default function Search() {
 
   return (
     <div>
-     <div style={{ width: 150, display: 'flex', justifyContent: 'flex-start', alignItems: 'center', margin: '0 auto', marginTop: 10 }}>
+     <div style={{ width: 150, display: 'flex', justifyContent: 'flex-start', alignItems: 'center', margin: '0 auto', marginTop: 30 }}>
        <div style={{ position: 'relative' }}>
         <div>
             <AiOutlineSearch style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', zIndex: 1 }} size={25} />
